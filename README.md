@@ -15,22 +15,28 @@ In order to connect Flask MySQL, we would need to install Flask-MySQL which is a
 
 First boot up the MySQL server. In order to install data into the database get to your terminal and type
 
-```mysql -u  -p```
+```
+mysql -u  -p
+```
 
 and then enter your password when prompted. Now, create a new database called EmpData and a table called User with 3 columns – UserId, Username, Password.
 
-```mysql> CREATE DATABASE EmpData;
+```
+mysql> CREATE DATABASE EmpData;
  
 mysql> CREATE TABLE User(
  userId INT NOT NULL AUTO_INCREMENT,
  userName VARCHAR(100) NOT NULL,
  password VARCHAR(40) NOT NULL,
  PRIMARY KEY(userId)
- );```
+ );
+ ```
 
 Now, insert some data into the table User
 
-```mysql> insert into User values('','Admin','admin');```
+```
+mysql> insert into User values('','Admin','admin');
+```
 
 So, we are all set with the MySQL database content.
 
