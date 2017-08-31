@@ -8,7 +8,9 @@
   <UL>
     {% for user in allusers %}
         <li>
-            {{ "Your self: " if user.userName == userName else "" }}
+            {% if user.userName == userName %}
+                <strong>Your self: </strong>
+            {% endif %}
             {{ user.userName }} / {{ user.password }}
         </li>
     {% endfor %}

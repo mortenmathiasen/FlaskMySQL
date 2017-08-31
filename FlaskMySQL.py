@@ -25,7 +25,7 @@ def Authenticate():
     if userfound:
         cursor.execute("SELECT * FROM User");
         allusers = cursor.fetchall();
-        return render_template('login-success.html', userFound=userfound, userName=username, allusers=allusers)
+        return render_template('login-success.html', userName=username, allusers=allusers)
     else:
         return render_template('login-failed.html')
 

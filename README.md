@@ -11,7 +11,7 @@ This repository is an example that shows how to create a web application using F
 
 ## Prepare MySQL database
 
-In order to connect Flask MySQL, we would need to install Flask-MySQL which is an extension, which allows us to connect to MySQL database.
+In order to connect Flask MySQL, we would need to install Flask-MySQL which is an extension, which allows us to connect to MySQL database. Either you can run the script file FlaskMySQL.sql or you can create the database manually.
 
 First boot up the MySQL server. In order to install data into the database get to your terminal and type
 
