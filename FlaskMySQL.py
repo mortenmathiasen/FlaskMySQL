@@ -1,13 +1,15 @@
 from flask import Flask, request, render_template
-from flask_mysqldb import MySQL
+import pymysql.cursors
 
-mysql = MySQL()
 app = Flask(__name__)
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'netrom'
-app.config['MYSQL_DB'] = 'EmpData'
-mysql.init_app(app)
+
+# Connect to the database
+connection = pymysql.connect(host='localhost',
+                             user='root',
+                             password='netrom',
+                             db='EmpData',
+                             charset='utf8mb4',
+                             cursorclass=pymysql.cursors.DictCursor)
 
 @app.route('/')
 def HomePage():
@@ -17,14 +19,16 @@ def HomePage():
 def Authenticate():
     username = request.form['username']
     password = request.form['password']
-    cursor = mysql.connection.cursor()
+    cursor = connection.cursor()
     cursor.execute("SELECT * from User where Username='" + username + "' and Password='" + password + "'")
-    data = cursor.fetchone()
-    if data is None:
-        userfound = False
+    userfound = cursor.fetchone() is not None
+    if userfound:
+        cursor.execute("SELECT * FROM User");
+        allusers = cursor.fetchall();
+        return render_template('login-success.html', userFound=userfound, userName=username, allusers=allusers)
     else:
-        userfound = True
-    return render_template('loginresult.html', userFound=userfound, userName=username)
+        return render_template('login-failed.html')
+
 
 if __name__ == '__main__':
     app.run()
