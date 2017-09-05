@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, url_for
 import pymysql.cursors
 
 app = Flask(__name__)
@@ -27,7 +27,8 @@ def Authenticate():
         allusers = cursor.fetchall();
         return render_template('login-success.html', userName=username, allusers=allusers)
     else:
-        return render_template('login-failed.html')
+        retryurl = url_for('HomePage')
+        return render_template('login-failed.html', retryURL=retryurl)
 
 
 if __name__ == '__main__':
